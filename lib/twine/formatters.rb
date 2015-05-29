@@ -5,11 +5,12 @@ require 'twine/formatters/flash'
 require 'twine/formatters/gettext'
 require 'twine/formatters/jquery'
 require 'twine/formatters/django'
+require 'twine/formatters/rails'
 require 'twine/formatters/tizen'
 
 module Twine
   module Formatters
-    @formatters = [Formatters::Apple, Formatters::Android, Formatters::Gettext, Formatters::JQuery, Formatters::Flash, Formatters::Django, Formatters::Tizen]
+    @formatters = [Formatters::Apple, Formatters::Android, Formatters::Gettext, Formatters::JQuery, Formatters::Flash, Formatters::Django, Formatters::Rails, Formatters::Tizen]
 
     class << self
       attr_reader :formatters
