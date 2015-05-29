@@ -33,13 +33,10 @@ module Twine
         end
 
         yaml = YAML.load_file(path)
-
-        puts "FILE"
-        puts yaml
-
         yaml[lang].each do |key, value|
+          new_key = key.gsub("\n","\\n")
           value.gsub!("\n","\\n")
-          set_translation_for_key(key, lang, value)
+          set_translation_for_key(new_key, lang, value)
         end
       end
 
