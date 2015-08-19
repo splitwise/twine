@@ -29,7 +29,7 @@ module Twine
         begin
           require "yaml"
         rescue LoadError
-          raise Twine::Error.new "You must run 'gem install json' in order to read or write Rails YAML files."
+          raise Twine::Error.new "You must run 'gem install yaml' in order to read or write Rails YAML files."
         end
 
         yaml = YAML.load_file(path)
@@ -45,7 +45,7 @@ module Twine
         begin
           require "json"
         rescue LoadError
-          raise Twine::Error.new "You must run 'gem install json' in order to read or write Rails YAML files."
+          raise Twine::Error.new "You must run 'gem install yaml' in order to read or write Rails YAML files."
         end
 
         printed_string = false
