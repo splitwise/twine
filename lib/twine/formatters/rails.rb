@@ -29,13 +29,14 @@ module Twine
         begin
           require "yaml"
         rescue LoadError
-          raise Twine::Error.new "You must run 'gem install json' in order to read or write jquery-localize files."
+          raise Twine::Error.new "You must run 'gem install yaml' in order to read or write Rails YAML files."
         end
 
         yaml = YAML.load_file(path)
         yaml[lang].each do |key, value|
           new_key = key.gsub("\n","\\n")
           value.gsub!("\n","\\n")
+          value.gsub!(/%(?!([0-9]+\$)?(@|d|l|i))/, '%%')   # handle literal percentage signs for iOS/Android
           set_translation_for_key(new_key, lang, value)
         end
       end
@@ -44,7 +45,7 @@ module Twine
         begin
           require "json"
         rescue LoadError
-          raise Twine::Error.new "You must run 'gem install json' in order to read or write Rails YAML files."
+          raise Twine::Error.new "You must run 'gem install yaml' in order to read or write Rails YAML files."
         end
 
         printed_string = false
@@ -65,6 +66,7 @@ module Twine
 
                 value = row.translated_string_for_lang(lang, default_lang)
                 value = value.gsub('"', '\\\\"')
+                value = value.gsub('%%', '%')   # handle literal percentage signs from iOS/Android
 
                 f.print "  \"#{key}\": \"#{value}\""
                 printed_string = true
