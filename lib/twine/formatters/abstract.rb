@@ -36,7 +36,7 @@ module Twine
             elsif c.match(/\d/)
               # leave the string alone if it already has numbered substitutions
               return str
-            else
+            elsif c == "s"
               substituteCount += 1
             end
             startFound = false
